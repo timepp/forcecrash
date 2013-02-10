@@ -2,6 +2,7 @@
 *.suo
 
 /forcecrash/Debug
+/forcecrash/Release
 
 /output
 
