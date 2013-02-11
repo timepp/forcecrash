@@ -59,10 +59,10 @@ struct pinfo
 			LPCWSTR p = line;
 			process_info pi;
 			pi.name = fetch_next_field(&p);
-			pi.pid = _wtoi(fetch_next_field(&p).c_str());
+			pi.pid = (DWORD)_wtoi(fetch_next_field(&p).c_str());
 			if (pi.name.length() > 0 && pi.pid != script_pid)
 			{
-				pi.ppid = _wtoi(fetch_next_field(&p).c_str());
+				pi.ppid = (DWORD)_wtoi(fetch_next_field(&p).c_str());
 				pi.image_path = fetch_next_field(&p);
 				pi.command_line = fetch_next_field(&p);
 				pl.push_back(pi);
@@ -80,7 +80,7 @@ private:
 		std::wstring ret;
 		LPCWSTR q = wcschr(*p, L'|');
 		if (!q) return ret;
-		ret.assign(*p, q - *p);
+		ret.assign(*p, static_cast<size_t>(q - *p));
 		*p = q + 1;
 		return ret;
 	}

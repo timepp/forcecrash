@@ -20,4 +20,4 @@
 
 #include <tplib/include/format_shim.h>
 
-#pragma warning(disable: 4710 4514 4555 4350)
+#pragma warning(disable: 4710 4711 4514 4555 4350)

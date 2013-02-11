@@ -31,6 +31,10 @@ LRESULT CMainDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam
 		);
 	SetIcon(hIcon, FALSE);
 
+	CMenu mu = GetSystemMenu(FALSE);
+	mu.InsertMenu(0, MF_BYPOSITION, ID_APP_ABOUT, RCString(ID_APP_ABOUT));
+	mu.InsertMenu(1, MF_BYPOSITION|MF_SEPARATOR, 1, L"");
+
 	ConfigureList();
 	CenterWindow();
 	RefreshList();
@@ -70,7 +74,6 @@ void CMainDlg::RefreshList()
 
 	int sortcol = m_list.GetSortColumn();
 	bool desc = m_list.IsSortDescending();
-	int scrollpos = m_list.GetTopIndex();
 
 	m_list.DeleteAllItems();
 
@@ -78,7 +81,6 @@ void CMainDlg::RefreshList()
 	pinfo::get_process_list(pl);
 	
 	index = 0;
-	int selected_index = -1;
 	for (process_list_t::const_iterator it = pl.begin(); it != pl.end(); ++it)
 	{
 		const process_info& pi = *it;
@@ -123,7 +125,7 @@ void CMainDlg::AdjustList()
 	m_list.SetColumnWidth(3, rc.right - rc.left - 255);
 }
 
-LRESULT CMainDlg::OnNMDblclkList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandled*/)
+LRESULT CMainDlg::OnNMDblclkList(int /*idCtrl*/, LPNMHDR /*pNMHDR*/, BOOL& /*bHandled*/)
 {
 	int index = m_list.GetSelectedIndex();
 	if (index >= 0)
@@ -144,7 +146,7 @@ LRESULT CMainDlg::OnNMDblclkList(int /*idCtrl*/, LPNMHDR pNMHDR, BOOL& /*bHandle
 			if (FAILED(hr))
 			{
 				WCHAR buffer[1024];
-				::FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM, NULL, hr, 0, buffer, _countof(buffer), NULL);
+				::FormatMessageW(FORMAT_MESSAGE_FROM_SYSTEM, NULL, (DWORD)hr, 0, buffer, _countof(buffer), NULL);
 				MessageBox(buffer, L"´íÎó", MB_ICONWARNING|MB_OK);
 			}
 		}
@@ -161,6 +163,22 @@ LRESULT CMainDlg::OnBnClickedButtonElevate(WORD /*wNotifyCode*/, WORD /*wID*/, H
 	if ((UINT)inst > 32)
 	{
 		EndDialog(IDOK);
+	}
+	return 0;
+}
+
+LRESULT CMainDlg::OnSysCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& bHandled)
+{
+	if (wParam == ID_APP_ABOUT)
+	{
+		if (MessageBox(RCString(IDS_ABOUT_DETAIL), RCString(ID_APP_ABOUT), MB_OKCANCEL) == IDOK)
+		{
+			::ShellExecuteW(NULL, L"open", L"https://github.com/timepp/forcecrash", NULL, NULL, SW_SHOW);
+		}
+	}
+	else
+	{
+		bHandled = FALSE;
 	}
 	return 0;
 }

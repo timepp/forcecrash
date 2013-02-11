@@ -13,6 +13,7 @@ public:
 		COMMAND_ID_HANDLER(IDCANCEL, OnOK)
 		MESSAGE_HANDLER(WM_INITDIALOG, OnInitDialog)
 		MESSAGE_HANDLER(WM_SIZE, OnSize)
+		MESSAGE_HANDLER(WM_SYSCOMMAND, OnSysCommand)
 		COMMAND_HANDLER(IDC_REFRESH, BN_CLICKED, OnBnClickedRefresh)
 		NOTIFY_HANDLER(IDC_LIST, NM_DBLCLK, OnNMDblclkList)
 		COMMAND_HANDLER(IDC_BUTTON_ELEVATE, BN_CLICKED, OnBnClickedButtonElevate)
@@ -33,6 +34,7 @@ private:
 	CSortListViewCtrl m_list;
 private:
 	LRESULT OnOK(int code, int id, HWND wnd, BOOL& handled);
+	LRESULT OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	LRESULT OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	LRESULT OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);

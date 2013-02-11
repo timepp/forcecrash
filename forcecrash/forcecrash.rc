@@ -102,6 +102,45 @@ IDI_ICON1               ICON                    "bug.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName", "timepalette"
+            VALUE "FileDescription", "故意让指定的进程崩溃!"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "forcecra.exe"
+            VALUE "LegalCopyright", "Copyright (C) 2013"
+            VALUE "OriginalFilename", "forcecra.exe"
+            VALUE "ProductName", "ForceCrash"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
@@ -117,6 +156,12 @@ BEGIN
     IDS_COMMANDLINE         "命令行"
     IDS_CRASH_CONFIRM       "进程名：%1\n命令行：%2\n\n这个进程将崩溃，确认吗？？！"
     IDS_CONFIRM             "请确认操作"
+    IDS_ABOUT_DETAIL        "ForceCrash V1.1 by timepp\n\nForceCrash可以让任意进程崩溃, 用于测试应用程序在崩溃时的反应是否正确, 也可以用来研究不同的软件面临崩溃时的行为.\n\n点""确定""访问forcecrash主页"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "关于ForceCrash"
 END
 
 #endif    // Chinese (Simplified, PRC) resources

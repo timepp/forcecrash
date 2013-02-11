@@ -12,6 +12,7 @@
 #define IDS_COMMANDLINE                 112
 #define IDS_CRASH_CONFIRM               113
 #define IDS_CONFIRM                     114
+#define IDS_ABOUT_DETAIL                115
 #define IDC_LIST                        1001
 #define IDC_REFRESH                     1002
 #define IDC_BUTTON_ELEVATE              1003
